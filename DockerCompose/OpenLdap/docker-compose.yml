@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  openldap:
+    image: osixia/openldap
+    container_name: openldap
+    ports:
+      - 389:389
+      - 636:636
+    volumes:
+      - /data/slapd/database:/var/lib/ldap
+      - /data/slapd/config:/etc/ldap/slapd.d
+    environment:
+      - LDAP_ADMIN_PASSWORD=bhgihbHGGI1!
+      - LDAP_DOMAIN=dr-adnan.com
+      - LDAP_ORGANISATION=dr-adnan
+      - LDAP_READONLY_USER=true
+      #- LDAP_READONLY_USER_USERNAME=ro
+      #- LDAP_READONLY_USER_PASSWORD=ro123456
+  openldapadmin:
+    image: osixia/phpldapadmin
+    container_name: OpenLdapAdmin
+    ports:
+      - 16443:443
+      - 16080:80
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=49.12.203.241

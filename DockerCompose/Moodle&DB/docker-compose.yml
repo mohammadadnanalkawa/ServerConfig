@@ -1,0 +1,42 @@
+version: '2'
+services:
+  moodledbmb:
+    image: docker.io/bitnami/mariadb:latest
+    ports:
+      - '9306:3306'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=no
+      - MARIADB_USER=bn_moodle
+      - MARIADB_PASSWORD=12345
+      - MARIADB_ROOT_PASSWORD=12345
+      - MARIADB_DATABASE=moodledbmb
+      - MARIADB_CHARACTER_SET=utf8mb4
+      - MARIADB_COLLATE=utf8mb4_unicode_ci
+    volumes:
+      - 'moodledbmb_data:/bitnami/mariadb'   
+  moodlemb:
+    image: docker.io/bitnami/moodle:4
+    ports:
+      - '9080:8080'
+      - '9449:8443'
+    environment:
+      - MOODLE_DATABASE_HOST=49.12.203.241
+      - MOODLE_DATABASE_PORT_NUMBER=9306
+      - MOODLE_DATABASE_USER=bn_moodle
+      - MOODLE_DATABASE_PASSWORD=12345
+      - MOODLE_DATABASE_NAME=moodledbmb
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=no
+    volumes:
+      - 'moodlemb_data:/bitnami/moodle'
+      - 'moodlembdata_data:/bitnami/moodledata'
+    depends_on:
+      - moodledbmb  
+volumes:
+  moodledbmb_data:
+    driver: local
+  moodlemb_data:
+    driver: local
+  moodlembdata_data:
+    driver: local
