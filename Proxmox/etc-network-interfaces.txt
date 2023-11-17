@@ -87,8 +87,8 @@ iface vmbr0 inet static
         post-up   iptables -t nat -A PREROUTING -i enp0s31f6 -p tcp --dport 53  -j DNAT --to 192.168.0.3:53
         post-down iptables -t nat -D PREROUTING -i enp0s31f6 -p tcp --dport 53  -j DNAT --to 192.168.0.3:53
 	# MinioPorts 9000, 9001
-        post-up   iptables -t nat -A PREROUTING -i enp0s31f6 -p tcp --dport 9000  -j DNAT --to 192.168.0.3:32778
-        post-down iptables -t nat -D PREROUTING -i enp0s31f6 -p tcp --dport 9000  -j DNAT --to 192.168.0.3:32778
-        post-up   iptables -t nat -A PREROUTING -i enp0s31f6 -p tcp --dport 9001  -j DNAT --to 192.168.0.3:32777
-        post-down iptables -t nat -D PREROUTING -i enp0s31f6 -p tcp --dport 9001  -j DNAT --to 192.168.0.3:32777
+        post-up   iptables -t nat -A PREROUTING -i enp0s31f6 -p tcp --dport 9000  -j DNAT --to 192.168.0.3:9002
+        post-down iptables -t nat -D PREROUTING -i enp0s31f6 -p tcp --dport 9000  -j DNAT --to 192.168.0.3:9002
+        post-up   iptables -t nat -A PREROUTING -i enp0s31f6 -p tcp --dport 9001  -j DNAT --to 192.168.0.3:9001
+        post-down iptables -t nat -D PREROUTING -i enp0s31f6 -p tcp --dport 9001  -j DNAT --to 192.168.0.3:9001
                                                                                                                                                 
